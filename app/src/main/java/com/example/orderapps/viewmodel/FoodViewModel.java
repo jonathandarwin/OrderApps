@@ -3,6 +3,7 @@ package com.example.orderapps.viewmodel;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
+import android.util.Log;
 
 import com.example.orderapps.model.Food;
 import com.example.orderapps.model.Transaction;
@@ -36,6 +37,21 @@ public class FoodViewModel extends ViewModel {
             total += food.getAmount();
         }
         return total;
+    }
+
+    public void addTransaction(Food food){
+        Transaction transaction = Transaction.getInstance();
+        int idx = transaction.getListFood().indexOf(food);
+        if(idx == -1){
+            // NOT FOUND
+            transaction.getListFood().add(food);
+        }
+        else{
+            // APPEND EXISTING
+            int amount = transaction.getListFood().get(idx).getAmount();
+            Log.d("masuksiniga", "amount : " + amount + " + " + food.getAmount());
+            transaction.getListFood().get(idx).setAmount(amount + food.getAmount());
+        }
     }
 
     public String getDate(){
