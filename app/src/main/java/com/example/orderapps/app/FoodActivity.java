@@ -114,9 +114,9 @@ public class FoodActivity extends BaseActivity<FoodActivityBinding, FoodViewMode
         dialogBinding.btnAddToCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                food.setAmount(Integer.parseInt(dialogBinding.txtAmount.getText().toString()));
-                if(getViewModel().checkTransaction(food)){
-                    getViewModel().addTransaction(food);
+                int amount = Integer.parseInt(dialogBinding.txtAmount.getText().toString());
+                if(amount > 0){
+                    getViewModel().addTransaction(food, amount);
                     showSnackbar();
                     bottomDialog.dismiss();
                 }

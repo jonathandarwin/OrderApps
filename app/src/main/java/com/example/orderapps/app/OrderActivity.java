@@ -59,9 +59,14 @@ public class OrderActivity extends BaseActivity<OrderActivityBinding, OrderViewM
         if(v.equals(getBinding().close)){
             finish();
         } else if (v.equals(getBinding().btnOrder)) {
-            transaction.setListFood(new ArrayList<Food>());
-            Toast.makeText(this, "Order Success", Toast.LENGTH_SHORT).show();
-            finish();
+            if(transaction.getListFood().size() > 0){
+                transaction.setListFood(new ArrayList<Food>());
+                Toast.makeText(this, "Order Success", Toast.LENGTH_SHORT).show();
+                finish();
+            }
+            else{
+                Toast.makeText(this, "There are no order right now", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }

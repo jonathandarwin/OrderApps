@@ -39,17 +39,16 @@ public class FoodViewModel extends ViewModel {
         return total;
     }
 
-    public void addTransaction(Food food){
+    public void addTransaction(Food food, int amount){
         Transaction transaction = Transaction.getInstance();
         int idx = transaction.getListFood().indexOf(food);
         if(idx == -1){
             // NOT FOUND
+            food.setAmount(amount);
             transaction.getListFood().add(food);
         }
         else{
             // APPEND EXISTING
-            int amount = transaction.getListFood().get(idx).getAmount();
-            Log.d("masuksiniga", "amount : " + amount + " + " + food.getAmount());
             transaction.getListFood().get(idx).setAmount(amount + food.getAmount());
         }
     }
